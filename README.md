@@ -12,3 +12,6 @@ Once you have Bitmessage setup and running, you may download and run bitboard wi
     python2 bitboard.py
   
 bitboard runs on port 8080 by default, so you should see it running when you visit http://localhost:8080 in your browser. For security purposes, you should probably disable javascript.
+
+
+![bitboard screenshot](/static/screenshot.png)
