@@ -1,0 +1,13 @@
+$def with (post, thread)
+
+$if post.image:
+	<a href="/images/?image=$:post.msgid"><img class="opimg" src="/images/?image=$:post.msgid"/></a>
+$else:
+	<img class="opimg" src="/static/thread.png"/>
+
+<div class="themed" id="$:post.postid">
+    $:render.elements.board.postheader(post, thread, True)
+    <div>
+        $:render.elements.board.post(post)
+    </div>
+</div>

@@ -1,0 +1,12 @@
+$def with (bodyview)
+
+<!DOCTYPE html>
+<html lang="en">
+    $:render.elements.head()
+    <body class="board">
+        <div class="gradient"></div>
+            $:render.elements.join_popup()
+            $:render.elements.themes_popup()
+            $:bodyview
+    </body>
+</html>

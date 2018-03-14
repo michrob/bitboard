@@ -1,0 +1,18 @@
+$def with ()
+
+<a id="banner_popup" href="#" class="banner_popup"></a>
+<div class="banner_popup">
+    <center>
+        <div class="themes">
+            <a class="closebutton outlined" id="closebutton" href="#closebutton">X</a>
+            <hr/>
+            $for themename in themes:
+                <div class="theme_$:themename">
+                    <form action="#" method="post" enctype="multipart/form-data">
+                        <input class="theme_$:themename clickable bold outlined" name="theme" type="submit" value="$:themename" />
+                    </form>
+                </div>
+        </div>
+    </center>
+</div>
+

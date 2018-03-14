@@ -1,0 +1,10 @@
+$def with (post, thread)
+
+<div class="post plaque" id="$:post.postid">
+	$:render.elements.board.postheader(post, thread, False)
+	<div>
+	$if post.image:
+		<a href="/images/?image=$:post.msgid"><img class="postimg" src="/images/?image=$:post.msgid"/></a>
+	$:render.elements.board.post(post)
+	</div>
+</div>

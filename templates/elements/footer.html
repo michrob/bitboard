@@ -1,0 +1,30 @@
+$def with ()
+
+$ chan = None
+$if 'current_chan' in model:
+    $ chan = model['current_chan']
+
+$ threadcount = bitmessage.getThreadCount(chan)
+
+$if threadcount == 0 or not 'current_page' in model:
+    $ pages = []
+$else:
+    $ pages = range(1, int(math.ceil(threadcount / config.threads_per_page) + 1))
+
+$ currentpage = 1
+$if 'current_page' in model:
+    $ currentpage = int(model['current_page'])
+
+$if len(pages) > 1:
+    <div class="pages plaque">
+
+        $if currentpage > 1:
+            <a class="next button" href="/board/?chan=$:chan&amp;page=$(currentpage-1)">Previous</a>
+        $for page in pages:
+            $ page_class = "link"
+            $if page == currentpage:
+                $ page_class += " bold"
+            <a class="$:page_class" href="/board/?chan=$:chan&amp;page=$:page">[$:page]</a>&nbsp;
+        $if currentpage < len(pages):
+            <a class="next button" href="/board/?chan=$:chan&amp;page=$(currentpage+1)">Next</a>
+    </div>

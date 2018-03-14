@@ -1,0 +1,39 @@
+$def with ()
+
+$ thread = None
+$if 'current_thread' in model:
+    $ thread = bitmessage.getChanThread(model['current_chan'], model['current_thread'])
+
+$ thread_subject = None
+$if thread:
+    $ thread_subject = thread.subject
+
+$ chan = None
+$if 'current_chan' in model:
+    $ chan = model['current_chan']
+
+<a id="reply_popup" href="#" class="reply_popup"></a>
+<div class="reply_popup">
+	<form method="post" enctype="multipart/form-data">
+		<table class="form">
+			<tbody>
+				<tr style="display:none;">
+					<td><input name="chan" value="$:chan"></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="form themed"><a class="closebutton outlined" id="closebutton" href="#closebutton">X</a></td>
+				</tr>
+				<tr>
+					<td><input style="display:none;" name="subject" value="$:thread_subject"/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea id="replyarea" class="form" name="body"></textarea></td>
+				</tr>
+				<tr>
+					<td><input name="image" type="file"/>
+					<td><input class="postbutton button" type="submit" value="Post"/></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>

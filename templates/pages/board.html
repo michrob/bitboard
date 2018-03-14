@@ -1,0 +1,42 @@
+$def with ()
+
+$:render.elements.chans()
+
+$:render.elements.banner()
+<br/>
+
+$:render.elements.title()
+
+$ threads = bitmessage.getChanThreads(model['current_chan'], model['current_page'])
+
+<hr/>
+<center>$:render.elements.board.postform()</center>
+<hr/>
+
+$for i in range(0, len(threads)):
+    <div class="thread">
+    $ thread = threads[i]
+    $:render.elements.board.post_op(thread.posts[0], thread)
+    $if len(thread.posts) > 6:
+        <br>
+        <span class="expand">
+            <br/>
+            $:len(thread.posts[1:-5]) posts truncated.
+            <a href="/thread/?chan=$:thread.chan&amp;threadid=$:thread.threadid" class="link">Click here</a>
+            to view.
+        </span>
+        $for post in thread.posts[-5:]:
+            <br/>
+            $:render.elements.board.post_reply(post, thread)
+    $else:
+        $for post in thread.posts[1:]:
+            $:render.elements.board.post_reply(post, thread)
+            <br/>
+    </div>
+    <hr/>
+
+$:render.elements.board.reply_popup()
+
+$:render.elements.footer()
+
+$:render.elements.chans()

@@ -1,0 +1,29 @@
+$def with ()
+
+
+$:render.elements.chans()
+
+$:render.elements.banner()
+<br/>
+
+$:render.elements.title()
+
+$ thread = bitmessage.getChanThread(model['current_chan'], model['current_thread'])
+
+<hr/>
+<center>$:render.elements.board.postform()</center>
+<hr/>
+
+<div class="thread">
+$if len(thread.posts) > 0:
+    $:render.elements.board.post_op(thread.posts[0], thread)
+
+$for post in thread.posts[1:]:
+    $:render.elements.board.post_reply(post, thread)
+    <br/>
+</div>
+<hr/>
+
+$:render.elements.board.reply_popup()
+
+$:render.elements.chans()

@@ -1,0 +1,33 @@
+$def with ()
+
+$ chan = None
+$if 'current_chan' in model:
+    $ chan = model['current_chan']
+
+<a id="join_popup" href="#" class="join_popup"></a>
+<div class="join_popup">
+    <form action="/join/" method="post" enctype="multipart/form-data">
+        <input style="display:none;" name="subject" value="$:chan"/>
+        <table class="join">
+            <tbody>
+                <tr>
+                    <td><a class="closebutton outlined" id="closebutton" href="#closebutton">X</a></td>
+                </tr>
+                <tr><td><center><p class="join">
+                    Enter the passphrase of the chan you would like to join.<br>
+                    Lists of popular channels are available
+                    <a class="join link newtab" target="_blank" href="https://duckduckgo.com/?q=bitmessage+chans">on the web.</a>
+                    </p></center></td>
+                </tr>
+                <tr>
+                    <td>
+                        <center><input placeholder="Example: bitboard" class="passphrase" name="passphrase" value=""/></center>
+                    </td>
+                </tr>
+                <tr>
+                    <td><center><input class="join button" type="submit" value="Join"/></center></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

@@ -1,0 +1,23 @@
+$def with ()
+
+$ chan_dict = bitmessage.getChans()
+$ chan_prefix = "[chan] "
+
+<div class="chans">
+    <center>
+        [
+        $for chan_name in chan_dict:
+            $ chan_key = chan_name
+            $if chan_name.startswith(chan_prefix):
+                $ chan_name = chan_name[len(chan_prefix):]
+            <a class="link" href="/board/?chan=$:chan_dict[chan_key]">$:chan_name</a>
+            $if not chan_key == chan_dict.items()[-1][0]:
+                /
+        ]
+    </center>
+    <br>
+    <center>
+        [&nbsp;<a class="join_popup bold link" href="#join_popup">Chans</a> /
+               <a class="banner_popup bold link" href="#banner_popup">Themes</a>&nbsp;]
+    </center>
+</div>

@@ -1,0 +1,28 @@
+$def with (post)
+
+$ isboardview = model['current_thread'] == None
+
+$ max_lines = 12
+$ max_chars = max_lines * 175
+
+<blockquote class="post">
+	<p class="post">
+	$ text = post.body
+	$ groups = text.split('\n')
+	$ part1 = "<br/>".join(groups[:max_lines])
+
+	$:part1
+
+	$if len(groups[max_lines:]) > 0 and isboardview:
+		<br>
+		<span class="expand">
+		<br/>
+			Comment truncated.
+			<a href="/thread/?chan=$:post.chan&amp;threadid=$:post.threadid#$:post.postid" class="link">Click here</a>
+			to view the full post.
+		</span>
+	$else:
+		<br>
+		$:"<br/>".join(groups[max_lines:])
+	</p>
+</blockquote>

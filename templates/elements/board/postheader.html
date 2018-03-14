@@ -1,0 +1,34 @@
+$def with (post, thread, isoppost)
+
+$ isboardview = model['current_thread'] == None
+
+$if isoppost:
+	<span class="subject bold"><b>$:post.subject</b></span>
+
+<span class="poster bold">&nbsp;<b>$:post.username</b></span>&nbsp;$:post.date
+
+$if isboardview:
+	<a class="link" href="/thread/?chan=$:post.chan&amp;threadid=$:post.threadid#$:post.postid">$:post.postid</a>
+$else:
+	<a class="link" href="#reply_popup" onclick="javascript:document.getElementById('replyarea').value += '>>$:post.postid\n';">$:post.postid</a>
+
+$if isboardview and isoppost:
+	[<a class="link" href="/thread/?chan=$:post.chan&amp;threadid=$:post.threadid">Reply</a>]
+
+
+<div tabindex="0" class="menu">
+	<span class="link clickable">&#9654;</span>
+	<table class="menu-content">
+		<tr class="menu-entry"><td>
+			<a class="link" href="/delete/?chan=$:thread.chan&amp;messageid=$:post.msgid">Delete&nbsp;Post</a>
+		</td></tr>
+	$if isoppost:
+		<tr class="menu-entry"><td>
+			<a class="link" href="/delete/?chan=$:thread.chan&amp;threadid=$:post.threadid">Delete&nbsp;Thread</a>
+		</td></tr>
+	</table>
+</div>
+
+$if not isboardview:
+	$for reply in thread.getPostReplies(post.postid):
+		<a class="reference link" href="#$:reply">&gt;&gt;$:reply</a>

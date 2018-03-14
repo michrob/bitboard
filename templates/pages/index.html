@@ -1,0 +1,13 @@
+$def with ()
+
+$ apistatus = bitmessage.getAPIStatus()
+
+$:render.elements.banner()
+
+<br/>
+$:render.elements.index.intro()
+
+$if apistatus != True:
+    $:render.elements.status()
+$else:
+    $:render.elements.index.start()
