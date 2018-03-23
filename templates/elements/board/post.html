@@ -4,10 +4,12 @@ $ isboardview = model['current_thread'] == None
 
 $ max_lines = 12
 $ max_chars = max_lines * 175
+$ text = post.body
+$if text is None:
+    $ text = ""
 
 <blockquote class="post">
 	<p class="post">
-	$ text = post.body
 	$ groups = text.split('\n')
 	$ part1 = "<br/>".join(groups[:max_lines])
 

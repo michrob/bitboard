@@ -155,16 +155,17 @@ class BitMessageGateway(Thread):
         subject = subject.encode('utf-8').strip()
         subjectdata = base64.b64encode(subject)
 
-        msgdata = {}
-        body = body.encode('utf-8').strip()
+        print body
+
+        msgdata = body.encode('utf-8').strip()
 
         if image:
             imagedata = base64.b64encode(image)
-            msgdata['image'] = imagedata
+            msgdata += "\n\n<img src=\"data:image/jpg;base64," + imagedata + "\">"
 
-        msgdata['text'] = body
+        print msgdata
 
-        msg = base64.b64encode(json.dumps(msgdata))
+        msg = base64.b64encode(msgdata)
 
         self._refresh = True
         return self._api.sendMessage(chan, chan, subjectdata, msg)

@@ -290,6 +290,7 @@ img.opimg {
 img.postimg {
     float: left;
     width: 125px;
+    margin-right: 6px;
     height: auto;
 }
 

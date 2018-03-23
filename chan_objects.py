@@ -81,7 +81,7 @@ class ChanPost:
                     print "Exception decoding image: " + `e`
                     print self.image
                     traceback.print_exc()
-                self.body = ""
+                self.body = self.body.split("<img")[0]
             else:
                 self.body = bleach.clean(self.body)
 
