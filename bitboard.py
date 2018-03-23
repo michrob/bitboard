@@ -3,6 +3,8 @@ from bitmessage_gateway import gateway_instance as nexus
 import config
 import math
 import themes
+import os
+import signal
 
 t_globals = dict(
     math=math,
@@ -184,5 +186,9 @@ class Index:
         return render.base(render.pages.index())
 
 
+def signal_handler(signal, frame):
+    os._exit(0)
+
 if __name__ == "__main__":
+    signal.signal(signal.SIGINT, signal_handler)
     app.run()

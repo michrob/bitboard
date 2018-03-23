@@ -1,13 +1,10 @@
 import base64
 import json
 import logging as log
-import sys
 import time
 import traceback
 import xmlrpclib
 from threading import Thread
-
-from sortedcontainers import SortedListWithKey as sortedlist
 
 import config
 from chan_objects import ChanBoard
@@ -28,12 +25,11 @@ class BitMessageGateway(Thread):
         self._postsById = {}
         self._boardByChan = {}
         self._chanDict = {}
-        self._killed = False
         self._refresh = True
         self._api = xmlrpclib.ServerProxy(getBitmessageEndpoint())
 
     def run(self):
-        while not self._killed:
+        while True:
             try:
                 print "Updating bitmessage info."
                 self.updateChans()
@@ -43,8 +39,6 @@ class BitMessageGateway(Thread):
 
                 for i in range(0, config.bm_refresh_interval):
                     time.sleep(i)
-                    if self._killed:
-                        sys.exit(0)
                     if self._refresh:
                         self._refresh = False
                         break
@@ -155,15 +149,11 @@ class BitMessageGateway(Thread):
         subject = subject.encode('utf-8').strip()
         subjectdata = base64.b64encode(subject)
 
-        print body
-
         msgdata = body.encode('utf-8').strip()
 
         if image:
             imagedata = base64.b64encode(image)
             msgdata += "\n\n<img src=\"data:image/jpg;base64," + imagedata + "\">"
-
-        print msgdata
 
         msg = base64.b64encode(msgdata)
 

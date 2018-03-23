@@ -234,6 +234,7 @@ textarea.form {
     min-width: 325px;
     min-height: 125px;
     border: 1px solid gray;
+    padding: 3px;
 }
 
 input.form {
